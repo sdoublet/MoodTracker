@@ -84,6 +84,21 @@ class DataBaseManager extends SQLiteOpenHelper {
     // }
 
 
- ''
+    // read the table in history
+    public List<Mood> readForWeek() {
+        List<Mood> moods = new ArrayList<>();
+
+        String selectMood = " SELECT * FROM " + DATA_TABLE + " ORDER BY dayOfYear  ";
+
+        Cursor cursor = getReadableDatabase().rawQuery(selectMood, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Mood mood = new Mood(cursor.getString(cursor.getColumnIndex("comment")), cursor.getString(cursor.getColumnIndex("mood")),
+                    cursor.getInt(cursor.getColumnIndex("dayOfYear")));
+            moods.add(mood);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return moods;
     }
 }
