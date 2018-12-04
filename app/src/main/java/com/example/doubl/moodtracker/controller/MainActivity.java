@@ -1,11 +1,13 @@
 package com.example.doubl.moodtracker.controller;
 
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
+import android.view.View;
 
 import com.example.doubl.moodtracker.R;
 import com.example.doubl.moodtracker.model.MoodEnum;
@@ -44,8 +46,15 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
         //to fix scroll item
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
+
+
     }
 
+
+    public void comment(View view) {
+        DialogFragment dialogFragment = new DialogFragment();
+        dialogFragment.show(getSupportFragmentManager(), "dialog");
+    }
     @Override
     public void onMoodClicked(MoodEnum position) {
 
