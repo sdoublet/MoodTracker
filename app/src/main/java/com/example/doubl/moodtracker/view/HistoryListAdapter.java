@@ -16,7 +16,7 @@ import com.example.doubl.moodtracker.R;
 import com.example.doubl.moodtracker.model.Mood;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class HistoryListAdapter extends ArrayAdapter<Mood> {
     private ArrayList<Mood> moodsList;

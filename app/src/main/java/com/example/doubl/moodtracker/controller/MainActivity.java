@@ -1,6 +1,7 @@
 package com.example.doubl.moodtracker.controller;
 
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.view.View;
 
 import com.example.doubl.moodtracker.R;
 import com.example.doubl.moodtracker.model.MoodEnum;
+import com.example.doubl.moodtracker.view.History;
 import com.example.doubl.moodtracker.view.RecyclerviewAdapter;
 
 import java.util.ArrayList;
@@ -54,6 +56,38 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
     public void comment(View view) {
         DialogFragment dialogFragment = new DialogFragment();
         dialogFragment.show(getSupportFragmentManager(), "dialog");
+    }
+
+    public void history(View view) {
+        Intent intent = new Intent(this, History.class);
+        startActivity(intent);
+        DataBaseManager dataBaseManager= new DataBaseManager(this);
+        dataBaseManager.deleteOldMood();
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        mediaPlayer1.start();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer1.pause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
     @Override
     public void onMoodClicked(MoodEnum position) {
