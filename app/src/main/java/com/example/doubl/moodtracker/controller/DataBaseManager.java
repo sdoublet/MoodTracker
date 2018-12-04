@@ -14,7 +14,7 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-class DataBaseManager extends SQLiteOpenHelper {
+public class DataBaseManager extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "mood.db";
     private static final int DB_VERSION = 1;
