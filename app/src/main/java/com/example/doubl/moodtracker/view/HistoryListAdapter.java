@@ -61,7 +61,43 @@ public class HistoryListAdapter extends ArrayAdapter<Mood> {
         textViewDay = convertView.findViewById(R.id.row_history_input);
         imageButtonComment = convertView.findViewById(R.id.row_history_button);
 
-      
+        if (mood.getComment() != null && !mood.getComment().equals("")) {
+            imageButtonComment.setVisibility(View.VISIBLE);
+        } else imageButtonComment.setVisibility(View.INVISIBLE);
+        imageButtonComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, mood.getComment(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        textViewDay.setText(mood.textviewSetText());
+
+        //convertView.setBackgroundColor(moodEnum.getColorBakground());
+        // convertView.setBackgroundColor(convertView.getResources().getColor(MoodEnum.values().getColorBakground()));
+
+        //convertView.getLayoutParams().width = width * moodEnum.getWidth();
+        //  for (MoodEnum moodEnum  : MoodEnum.values()){
+        //      convertView.setBackgroundColor(convertView.getResources().getColor(moodEnum.getColorBakground()));
+
+        // convertView.getLayoutParams().width = width*moodEnum.getWidth();
+        //  }
+
+        if (mood.getMood_().contains("SUPPER_HAPPY")) {
+            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.banana_yellow));
+        } else if (mood.getMood_().contains("HAPPY")) {
+            convertView.getLayoutParams().width = width * 4;
+            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.light_sage));
+        } else if (mood.getMood_().contains("NORMAL")) {
+            convertView.getLayoutParams().width = width * 3;
+            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.cornflower_blue_65));
+        } else if (mood.getMood_().contains("DISAPPOINTED")) {
+            convertView.getLayoutParams().width = width * 2;
+            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.warm_grey));
+        } else if (mood.getMood_().contains("SAD")) {
+            convertView.getLayoutParams().width = width;
+            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.faded_red));
+        }
         return convertView;
     }
 }
