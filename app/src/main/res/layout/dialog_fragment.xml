@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+
+
+    <EditText
+        android:id="@+id/dialog_input"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:hint="@string/enter_your_message"
+        android:inputType="text"
+        tools:ignore="Autofill" />
+
+    <Button
+        android:id="@+id/validate_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Save"/>
 
 </LinearLayout>
