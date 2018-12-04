@@ -2,7 +2,6 @@ package com.example.doubl.moodtracker.controller;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +16,8 @@ public class DialogFragment extends android.support.v4.app.DialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.dialog_fragment, container, false);
 
-        final EditText editText =view.findViewById(R.id.dialog_input);
+        final EditText editText = view.findViewById(R.id.dialog_input);
         Button saveComment = view.findViewById(R.id.validate_dialog);
-
 
 
         saveComment.setOnClickListener(new View.OnClickListener() {

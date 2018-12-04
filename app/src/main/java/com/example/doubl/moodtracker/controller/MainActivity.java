@@ -1,6 +1,6 @@
 package com.example.doubl.moodtracker.controller;
 
-import android.support.v4.app.DialogFragment;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
