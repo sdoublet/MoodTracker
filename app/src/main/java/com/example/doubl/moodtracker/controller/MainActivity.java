@@ -78,7 +78,30 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
                 //To have the height of Recyclerview only if items are equals
                 currentpage = offset/recyclerView.getHeight();
 
-               
+                if (currentpage==0){
+                    // MoodEnum.values()[0] = MoodEnum.SUPPER_HAPPY;
+                    dataBaseManager.insertNewMood();// change it
+                    dataBaseManager.insertMood("", MoodEnum.SUPPER_HAPPY);
+                }else if (currentpage==1){
+                    // MoodEnum.values()[1] = MoodEnum.HAPPY;
+                    dataBaseManager.insertNewMood();
+                    dataBaseManager.insertMood("", MoodEnum.HAPPY);
+                }else if (currentpage==2){
+                    //MoodEnum.values()[2] = MoodEnum.NORMAL;
+                    dataBaseManager.insertNewMood();
+                    dataBaseManager.insertMood("", MoodEnum.NORMAL);
+                }else if (currentpage==3){
+                    // MoodEnum.values()[3]=MoodEnum.DISAPPOINTED;
+                    dataBaseManager.insertNewMood();
+                    dataBaseManager.insertMood("", MoodEnum.DISAPPOINTED);
+                }else if (currentpage==4){
+                    //MoodEnum.values()[4]=MoodEnum.SAD;
+                    dataBaseManager.insertNewMood();
+                    dataBaseManager.insertMood("", MoodEnum.SAD);}
+
+
+                String str = Integer.toString( currentpage);
+                Log.i("moodenum",str );
             }
         });
 
