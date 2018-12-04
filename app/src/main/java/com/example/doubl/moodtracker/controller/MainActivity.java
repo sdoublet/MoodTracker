@@ -69,6 +69,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+                Log.d("onscrolled", "onScrolled() called with: , dx = [" + dx + "], dy = [" + dy + "]");
+
+                DataBaseManager dataBaseManager = new DataBaseManager(recyclerView.getContext());
+                int offset =recyclerView.computeVerticalScrollOffset();
+                int currentpage;
+
+                //To have the height of Recyclerview only if items are equals
+                currentpage = offset/recyclerView.getHeight();
+
+               
             }
         });
 
