@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/row_history_layout"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:background="@color/faded_red"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/row_history_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text= "@string/date"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <ImageView
+        android:id="@+id/row_history_button"
+        android:layout_width="36dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center|end"
+        android:src="@drawable/ic_comment_black_48px"
+        android:visibility="visible"
+        tools:ignore="ContentDescription" />
+
+</LinearLayout>
