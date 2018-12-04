@@ -3,6 +3,8 @@ package com.example.doubl.moodtracker.view;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.doubl.moodtracker.R;
+
 public class History extends AppCompatActivity {
 
     @Override
