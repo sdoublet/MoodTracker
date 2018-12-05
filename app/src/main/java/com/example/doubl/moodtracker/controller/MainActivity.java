@@ -10,11 +10,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 
 import com.example.doubl.moodtracker.R;
 import com.example.doubl.moodtracker.model.MoodEnum;
+import com.example.doubl.moodtracker.view.DialogFragmentSms;
 import com.example.doubl.moodtracker.view.History;
 import com.example.doubl.moodtracker.view.RecyclerviewAdapter;
 
@@ -26,10 +28,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
     private MediaPlayer mediaPlayer1;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         mediaPlayer1 = MediaPlayer.create(this, R.raw.musique);
         final RecyclerView recyclerView = findViewById(R.id.recycler_view);
@@ -46,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
         final RecyclerviewAdapter recyclerViewAdapter = new RecyclerviewAdapter(happyList, this);
         recyclerView.setAdapter(recyclerViewAdapter);
 
-        //computeRecyclerviewHeight(recyclerView);
+
         // to scroll to happy mood position
         recyclerView.scrollToPosition(1);
 
@@ -54,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
         //to fix scroll item
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
+
+        // Listener for recyclerview
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -102,9 +108,19 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
 
                 String str = Integer.toString( currentpage);
                 Log.i("moodenum",str );
+
             }
         });
 
+    }
+
+
+    public void sms(View view){
+        DialogFragmentSms dialogFragment = new DialogFragmentSms();
+        dialogFragment.show(getSupportFragmentManager(), "sms");
+    }
+    public void send_sms(View view) {
+        SmsManager.getDefault().sendTextMessage("+33622611305" , null, "salut", null, null);
     }
 
 
@@ -148,4 +164,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
     public void onMoodClicked(MoodEnum position) {
 
     }
+
+
+
 }

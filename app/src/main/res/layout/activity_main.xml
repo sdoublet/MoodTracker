@@ -34,4 +34,14 @@
         android:layout_margin="10dp"
         android:onClick="comment"
         tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/sms_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icons8_sms_52"
+        android:layout_alignParentEnd="true"
+        android:onClick="sms"
+        android:layout_margin="10dp"
+        />
 </RelativeLayout>

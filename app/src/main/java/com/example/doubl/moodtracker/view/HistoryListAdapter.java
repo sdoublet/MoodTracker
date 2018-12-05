@@ -23,7 +23,7 @@ public class HistoryListAdapter extends ArrayAdapter<Mood> {
     private Context context;
 
 
-    public HistoryListAdapter(Context context, int layoutResourceId, ArrayList<Mood> historyMoodArrayList) {
+    HistoryListAdapter(Context context, int layoutResourceId, ArrayList<Mood> historyMoodArrayList) {
         super(context, layoutResourceId, historyMoodArrayList);
         this.moodsList = historyMoodArrayList;
         this.context = context;
@@ -72,17 +72,12 @@ public class HistoryListAdapter extends ArrayAdapter<Mood> {
         });
 
         textViewDay.setText(mood.textviewSetText());
+        setBackgroundColor(convertView, width, mood);
 
-        //convertView.setBackgroundColor(moodEnum.getColorBakground());
-        // convertView.setBackgroundColor(convertView.getResources().getColor(MoodEnum.values().getColorBakground()));
+        return convertView;
+    }
 
-        //convertView.getLayoutParams().width = width * moodEnum.getWidth();
-        //  for (MoodEnum moodEnum  : MoodEnum.values()){
-        //      convertView.setBackgroundColor(convertView.getResources().getColor(moodEnum.getColorBakground()));
-
-        // convertView.getLayoutParams().width = width*moodEnum.getWidth();
-        //  }
-
+    private void setBackgroundColor(View convertView, int width, Mood mood) {
         if (mood.getMood_().contains("SUPPER_HAPPY")) {
             convertView.setBackgroundColor(convertView.getResources().getColor(R.color.banana_yellow));
         } else if (mood.getMood_().contains("HAPPY")) {
@@ -98,7 +93,6 @@ public class HistoryListAdapter extends ArrayAdapter<Mood> {
             convertView.getLayoutParams().width = width;
             convertView.setBackgroundColor(convertView.getResources().getColor(R.color.faded_red));
         }
-        return convertView;
     }
 }
 

@@ -3,4 +3,7 @@
     <string name="Save">Save</string>
     <string name="enter_your_message">Enter your message</string>
     <string name="date">date</string>
+    <string name="send_sms">Send sms</string>
+    <string name="enter_your_partner_phone_number">Enter your partner phone number</string>
+    <string name="your_message">Your message</string>
 </resources>
