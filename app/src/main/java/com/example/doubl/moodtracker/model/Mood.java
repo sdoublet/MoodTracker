@@ -28,6 +28,9 @@ public class Mood {
         return mood_;
     }
 
+    public void setMood_(String mood_) {
+        this.mood_ = mood_;
+    }
 
     public int getDate() {
         return date;

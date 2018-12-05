@@ -1,8 +1,10 @@
 package com.example.doubl.moodtracker.controller;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,8 +15,10 @@ import android.support.v7.widget.SnapHelper;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import com.example.doubl.moodtracker.R;
+import com.example.doubl.moodtracker.model.Mood;
 import com.example.doubl.moodtracker.model.MoodEnum;
 import com.example.doubl.moodtracker.view.DialogFragmentSms;
 import com.example.doubl.moodtracker.view.History;
@@ -26,15 +30,17 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements RecyclerviewAdapter.OnMoodClickedCallBack {
 
     private MediaPlayer mediaPlayer1;
+    private EditText phoneNumber;
 
 
-
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
+        phoneNumber = findViewById(R.id.phone_);
         mediaPlayer1 = MediaPlayer.create(this, R.raw.musique);
         final RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -84,26 +90,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
                 //To have the height of Recyclerview only if items are equals
                 currentpage = offset/recyclerView.getHeight();
 
-                if (currentpage==0){
-                    // MoodEnum.values()[0] = MoodEnum.SUPPER_HAPPY;
-                    dataBaseManager.insertNewMood();// change it
-                    dataBaseManager.insertMood("", MoodEnum.SUPPER_HAPPY);
-                }else if (currentpage==1){
-                    // MoodEnum.values()[1] = MoodEnum.HAPPY;
-                    dataBaseManager.insertNewMood();
-                    dataBaseManager.insertMood("", MoodEnum.HAPPY);
-                }else if (currentpage==2){
-                    //MoodEnum.values()[2] = MoodEnum.NORMAL;
-                    dataBaseManager.insertNewMood();
-                    dataBaseManager.insertMood("", MoodEnum.NORMAL);
-                }else if (currentpage==3){
-                    // MoodEnum.values()[3]=MoodEnum.DISAPPOINTED;
-                    dataBaseManager.insertNewMood();
-                    dataBaseManager.insertMood("", MoodEnum.DISAPPOINTED);
-                }else if (currentpage==4){
-                    //MoodEnum.values()[4]=MoodEnum.SAD;
-                    dataBaseManager.insertNewMood();
-                    dataBaseManager.insertMood("", MoodEnum.SAD);}
+                curentPageMood(dataBaseManager, currentpage);
 
 
                 String str = Integer.toString( currentpage);
@@ -114,14 +101,29 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
 
     }
 
+    private void curentPageMood(DataBaseManager dataBaseManager, int currentpage) {
+
+        if (currentpage==0){
+             MoodEnum.values()[0] = MoodEnum.SUPPER_HAPPY;
+        }else if (currentpage==1){
+             MoodEnum.values()[1] = MoodEnum.HAPPY;
+        }else if (currentpage==2){
+            MoodEnum.values()[2] = MoodEnum.NORMAL;
+        }else if (currentpage==3){
+             MoodEnum.values()[3]=MoodEnum.DISAPPOINTED;
+        }else if (currentpage==4) {
+            MoodEnum.values()[4] = MoodEnum.SAD;
+        }
+            dataBaseManager.insertNewMood();
+            dataBaseManager.insertMood("", MoodEnum.values()[currentpage]);
+    }
+
 
     public void sms(View view){
         DialogFragmentSms dialogFragment = new DialogFragmentSms();
         dialogFragment.show(getSupportFragmentManager(), "sms");
     }
-    public void send_sms(View view) {
-        SmsManager.getDefault().sendTextMessage("+33622611305" , null, "salut", null, null);
-    }
+
 
 
     public void comment(View view) {
