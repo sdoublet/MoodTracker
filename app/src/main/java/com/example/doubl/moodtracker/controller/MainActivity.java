@@ -17,7 +17,7 @@ import com.example.doubl.moodtracker.R;
 import com.example.doubl.moodtracker.model.MoodEnum;
 import com.example.doubl.moodtracker.view.DialogFragmentSms;
 import com.example.doubl.moodtracker.view.DialogueFragment;
-import com.example.doubl.moodtracker.view.RecyclerviewAdapter;
+import com.example.doubl.moodtracker.view.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import java.util.List;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 
-public class MainActivity extends AppCompatActivity implements RecyclerviewAdapter.OnMoodClickedCallBack {
+public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.OnMoodClickedCallBack {
 
     private MediaPlayer mediaPlayer1;
 
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
         happyList.add(MoodEnum.DISAPPOINTED);
         happyList.add(MoodEnum.SAD);
 
-        final RecyclerviewAdapter recyclerViewAdapter = new RecyclerviewAdapter(happyList, this);
+        final RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(happyList, this);
         recyclerView.setAdapter(recyclerViewAdapter);
 
         // to scroll to happy mood position
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
 
-        // Listener for recyclerview
+        // Listener for RecyclerView
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -76,25 +76,25 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                Log.d("onscrolled", "onScrolled() called with: , dx = [" + dx + "], dy = [" + dy + "]");
+                Log.d("onScrolled", "onScrolled() called with: , dx = [" + dx + "], dy = [" + dy + "]");
 
                 DataBaseManager dataBaseManager = new DataBaseManager(recyclerView.getContext());
                 int offset =recyclerView.computeVerticalScrollOffset();
-                int currentpage;
+                int currentPage;
 
-                //To have the height of Recyclerview only if items are equals
-                currentpage = offset/recyclerView.getHeight();
+                //To have the height of RecyclerView only if items are equals
+                currentPage = offset/recyclerView.getHeight();
 
                 // To know position
-               // MoodEnum.currentPageMood(currentpage);
+               // MoodEnum.currentPageMood(currentPage);
 
                 dataBaseManager.insertNewMood();
-                dataBaseManager.insertMood("", MoodEnum.values()[currentpage]);
+                dataBaseManager.insertMood("", MoodEnum.values()[currentPage]);
 
 
 
-                String str = Integer.toString( currentpage);
-                Log.i("moodenum",str ); }
+                String str = Integer.toString( currentPage);
+                Log.i("moodEnum",str ); }
         });
     }
 

@@ -54,7 +54,7 @@ public class Mood {
     }
 
 
-    public String textviewSetText(){
+    public String textViewSetText(){
         int i=date;
         int dayAgo = getDayOfYear() - i;
         String str = Integer.toString(dayAgo);

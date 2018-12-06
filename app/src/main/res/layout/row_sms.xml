@@ -15,7 +15,7 @@
         android:gravity="center"
         android:hint="@string/enter_your_partner_phone_number"
         android:inputType="phone"
-         />
+        tools:ignore="Autofill" />
 
 
 

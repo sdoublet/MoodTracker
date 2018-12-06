@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.example.doubl.moodtracker.R;
-import com.example.doubl.moodtracker.controller.DataBaseManager;
 import com.example.doubl.moodtracker.model.Mood;
 import com.example.doubl.moodtracker.view.HistoryListAdapter;
 

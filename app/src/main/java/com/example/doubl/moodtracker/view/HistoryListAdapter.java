@@ -72,7 +72,7 @@ public class HistoryListAdapter extends ArrayAdapter<Mood> {
             }
         });
 
-        textViewDay.setText(mood.textviewSetText());
+        textViewDay.setText(mood.textViewSetText());
         setBackgroundColor(convertView, width, mood);
 
 
@@ -81,7 +81,7 @@ public class HistoryListAdapter extends ArrayAdapter<Mood> {
 
     private void setBackgroundColor(View convertView, int width, Mood mood) {
 
-        convertView.setBackgroundColor(convertView.getContext().getResources().getColor(mood.getMoodEnum().getColorBakground()));
+        convertView.setBackgroundColor(convertView.getContext().getResources().getColor(mood.getMoodEnum().getColorBackground()));
         convertView.getLayoutParams().width = width* mood.getMoodEnum().getWidth();
 
     }

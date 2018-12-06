@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.doubl.moodtracker.model.Mood;
 import com.example.doubl.moodtracker.model.MoodEnum;
 
-import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +39,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
 
 
     // insert mood in table
-    public void insertMood(String comment, MoodEnum moodEnum) {
+    void insertMood(String comment, MoodEnum moodEnum) {
         Mood mood = new Mood();
         int date = mood.getDayOfYear();
         ContentValues values = new ContentValues();
@@ -64,7 +63,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
     }
 
     // update the last entry if the date is the same of today and change value's date
-    public void insertNewMood() {
+    void insertNewMood() {
         Mood mood = new Mood();
         int date = 0;
         ContentValues values = new ContentValues();
@@ -73,7 +72,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
     }
 
     // delete on the table if date equal 0 to have only one value per date
-    public void deleteOldMood() {
+    void deleteOldMood() {
         int date = 0;
         String sql = " DELETE FROM " + DATA_TABLE + " WHERE dayOfYear=" + date;
         this.getWritableDatabase().execSQL(sql);
@@ -87,7 +86,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
 
 
     // read the table in history
-    public List<Mood> readForWeek() {
+    List<Mood> readForWeek() {
         List<Mood> moods = new ArrayList<>();
         Mood mood_ = new Mood();
         String selectMood = " SELECT * FROM " + DATA_TABLE + " WHERE dayofYear>=" + (mood_.getDayOfYear() - 8) + " ORDER BY dayOfYear  ";

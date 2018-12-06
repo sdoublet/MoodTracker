@@ -15,7 +15,7 @@ import com.example.doubl.moodtracker.model.MoodEnum;
 import java.util.List;
 
 
-public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.HappyViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.HappyViewHolder> {
 
     private List<MoodEnum> happyList;
     private OnMoodClickedCallBack callBack;
@@ -51,7 +51,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     }
 
 
-}public RecyclerviewAdapter(List<MoodEnum> happyList, OnMoodClickedCallBack callBack) {
+}public RecyclerViewAdapter(List<MoodEnum> happyList, OnMoodClickedCallBack callBack) {
     this.happyList = happyList;
     this.callBack = callBack;
 
@@ -77,8 +77,8 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     @Override
     public void onBindViewHolder(@NonNull HappyViewHolder happyViewHolder, int position) {
         MoodEnum happy = happyList.get(position);
-        happyViewHolder.ivSmiley.setImageResource(happy.getDrawableIcone());
-        happyViewHolder.background.setBackgroundColor(happyViewHolder.itemView.getContext().getResources().getColor(happy.getColorBakground()));
+        happyViewHolder.ivSmiley.setImageResource(happy.getDrawableIcon());
+        happyViewHolder.background.setBackgroundColor(happyViewHolder.itemView.getContext().getResources().getColor(happy.getColorBackground()));
 
     }
 
