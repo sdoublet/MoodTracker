@@ -20,6 +20,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
     private static final String DATA_TABLE = "MOOD";
 
+
     public DataBaseManager(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -64,10 +65,11 @@ public class DataBaseManager extends SQLiteOpenHelper {
 
     // update the last entry if the date is the same of today and change value's date
     public void insertNewMood() {
+        Mood mood = new Mood();
         int date = 0;
         ContentValues values = new ContentValues();
         values.put("dayOfYear", date);
-        this.getWritableDatabase().update(DATA_TABLE, values, "dayOfYear=" + DateTime.now().getDayOfYear(), null);
+        this.getWritableDatabase().update(DATA_TABLE, values, "dayOfYear=" + mood.getDayOfYear(), null);
     }
 
     // delete on the table if date equal 0 to have only one value per date
@@ -101,4 +103,5 @@ public class DataBaseManager extends SQLiteOpenHelper {
         cursor.close();
         return moods;
     }
+
 }

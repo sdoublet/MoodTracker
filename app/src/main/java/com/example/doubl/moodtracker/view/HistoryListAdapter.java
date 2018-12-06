@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.doubl.moodtracker.R;
 import com.example.doubl.moodtracker.model.Mood;
+import com.example.doubl.moodtracker.model.MoodEnum;
 
 import java.util.ArrayList;
 
@@ -78,6 +79,7 @@ public class HistoryListAdapter extends ArrayAdapter<Mood> {
     }
 
     private void setBackgroundColor(View convertView, int width, Mood mood) {
+
         if (mood.getMood_().contains("SUPPER_HAPPY")) {
             convertView.setBackgroundColor(convertView.getResources().getColor(R.color.banana_yellow));
         } else if (mood.getMood_().contains("HAPPY")) {
@@ -92,6 +94,7 @@ public class HistoryListAdapter extends ArrayAdapter<Mood> {
         } else if (mood.getMood_().contains("SAD")) {
             convertView.getLayoutParams().width = width;
             convertView.setBackgroundColor(convertView.getResources().getColor(R.color.faded_red));
+
         }
     }
 }

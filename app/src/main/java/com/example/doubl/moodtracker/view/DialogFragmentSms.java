@@ -17,7 +17,7 @@ import com.example.doubl.moodtracker.model.MoodEnum;
 
 public class DialogFragmentSms extends DialogFragment {
 
-
+MoodEnum moodEnum;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -31,7 +31,7 @@ public class DialogFragmentSms extends DialogFragment {
             public void onClick(View v) {
 
                 String phone = phoneNumber.getText().toString();
-                SmsManager.getDefault().sendTextMessage(phone, null, "You know what ? I am"  + " " +  MoodEnum.values()[0].toString(), null,null);
+                SmsManager.getDefault().sendTextMessage(phone, null, "You know what ? I am"  + " " + MoodEnum.values()[moodEnum.getPosition()], null,null);
                 dismiss();
             }
         });

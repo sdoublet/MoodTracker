@@ -4,7 +4,6 @@ package com.example.doubl.moodtracker.controller;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,13 +11,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-
 import com.example.doubl.moodtracker.R;
-import com.example.doubl.moodtracker.model.Mood;
 import com.example.doubl.moodtracker.model.MoodEnum;
 import com.example.doubl.moodtracker.view.DialogFragmentSms;
 import com.example.doubl.moodtracker.view.History;
@@ -30,7 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements RecyclerviewAdapter.OnMoodClickedCallBack {
 
     private MediaPlayer mediaPlayer1;
-    private EditText phoneNumber;
+
 
 
     @SuppressLint("WrongViewCast")
@@ -39,8 +34,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        phoneNumber = findViewById(R.id.phone_);
         mediaPlayer1 = MediaPlayer.create(this, R.raw.musique);
         final RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -56,10 +49,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
         final RecyclerviewAdapter recyclerViewAdapter = new RecyclerviewAdapter(happyList, this);
         recyclerView.setAdapter(recyclerViewAdapter);
 
-
         // to scroll to happy mood position
         recyclerView.scrollToPosition(1);
-
 
         //to fix scroll item
         SnapHelper snapHelper = new LinearSnapHelper();
@@ -90,41 +81,23 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
                 //To have the height of Recyclerview only if items are equals
                 currentpage = offset/recyclerView.getHeight();
 
-                curentPageMood(dataBaseManager, currentpage);
+                // To know position
+                MoodEnum.currentPageMood(currentpage);
+
+                dataBaseManager.insertNewMood();
+                dataBaseManager.insertMood("", MoodEnum.values()[currentpage]);
+
 
 
                 String str = Integer.toString( currentpage);
-                Log.i("moodenum",str );
-
-            }
+                Log.i("moodenum",str ); }
         });
-
     }
-
-    private void curentPageMood(DataBaseManager dataBaseManager, int currentpage) {
-
-        if (currentpage==0){
-             MoodEnum.values()[0] = MoodEnum.SUPPER_HAPPY;
-        }else if (currentpage==1){
-             MoodEnum.values()[1] = MoodEnum.HAPPY;
-        }else if (currentpage==2){
-            MoodEnum.values()[2] = MoodEnum.NORMAL;
-        }else if (currentpage==3){
-             MoodEnum.values()[3]=MoodEnum.DISAPPOINTED;
-        }else if (currentpage==4) {
-            MoodEnum.values()[4] = MoodEnum.SAD;
-        }
-            dataBaseManager.insertNewMood();
-            dataBaseManager.insertMood("", MoodEnum.values()[currentpage]);
-    }
-
 
     public void sms(View view){
         DialogFragmentSms dialogFragment = new DialogFragmentSms();
         dialogFragment.show(getSupportFragmentManager(), "sms");
     }
-
-
 
     public void comment(View view) {
         DialogFragment dialogFragment = new DialogFragment();
@@ -139,34 +112,23 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
     }
     @Override
     protected void onStart() {
-        super.onStart();
-
-
-    }
+        super.onStart(); }
 
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        mediaPlayer1.start();
-
-    }
+        mediaPlayer1.start(); }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mediaPlayer1.pause();
-    }
+        mediaPlayer1.pause(); }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+        super.onDestroy(); }
 
-    }
     @Override
     public void onMoodClicked(MoodEnum position) {
-
     }
-
-
-
 }

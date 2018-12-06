@@ -4,6 +4,7 @@ import android.util.Log;
 
 import org.joda.time.DateTime;
 
+
 public class Mood {
 
     private String comment;
@@ -28,9 +29,7 @@ public class Mood {
         return mood_;
     }
 
-    public void setMood_(String mood_) {
-        this.mood_ = mood_;
-    }
+
 
     public int getDate() {
         return date;
@@ -43,17 +42,20 @@ public class Mood {
 
 
     public int getDayOfYear() {
-        DateTime dateTime1 = new DateTime();
-        int days = dateTime1.getDayOfYear();
-        String str = Integer.toString(days);
-        Log.i("date", str);
-        return days;
+       DateTime dateTime1 = new DateTime();
+       int days = dateTime1.getDayOfYear();
+       int year = dateTime1.getYear() *1000;
+       int date = days + year;
+       String str = Integer.toString(days);
+       Log.i("date", str);
+
+        return date;
     }
 
 
     public String textviewSetText(){
         int i=date;
-        int dayAgo = DateTime.now().getDayOfYear() - i;
+        int dayAgo = getDayOfYear() - i;
         String str = Integer.toString(dayAgo);
         Log.i("day", str);
         if (i==getDayOfYear()){
