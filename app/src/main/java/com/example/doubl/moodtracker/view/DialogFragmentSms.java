@@ -2,6 +2,7 @@ package com.example.doubl.moodtracker.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.doubl.moodtracker.R;
-import com.example.doubl.moodtracker.controller.DialogFragment;
-import com.example.doubl.moodtracker.controller.MainActivity;
-import com.example.doubl.moodtracker.model.Mood;
+
+
 import com.example.doubl.moodtracker.model.MoodEnum;
 
 public class DialogFragmentSms extends DialogFragment {

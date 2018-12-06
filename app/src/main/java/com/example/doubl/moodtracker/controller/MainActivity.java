@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
     }
 
     public void comment(View view) {
-        DialogFragment dialogFragment = new DialogFragment();
+        DialogueFragment dialogFragment = new DialogueFragment();
         dialogFragment.show(getSupportFragmentManager(), "dialog");
     }
 

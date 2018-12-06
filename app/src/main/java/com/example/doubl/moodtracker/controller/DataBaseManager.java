@@ -55,10 +55,10 @@ public class DataBaseManager extends SQLiteOpenHelper {
 
     // update the table with the comment DialogFragment
     void updateComment(String comment_) {
-
+        Mood mood = new Mood();
         ContentValues values = new ContentValues();
         values.put("comment", comment_);
-        this.getWritableDatabase().update(DATA_TABLE, values, "dayOfYear=" + DateTime.now().getDayOfYear(), null);
+        this.getWritableDatabase().update(DATA_TABLE, values, "dayOfYear=" + mood.getDayOfYear(), null);
 
 
     }
@@ -89,8 +89,8 @@ public class DataBaseManager extends SQLiteOpenHelper {
     // read the table in history
     public List<Mood> readForWeek() {
         List<Mood> moods = new ArrayList<>();
-
-        String selectMood = " SELECT * FROM " + DATA_TABLE + " ORDER BY dayOfYear  ";
+        Mood mood_ = new Mood();
+        String selectMood = " SELECT * FROM " + DATA_TABLE + " WHERE dayofYear>=" + (mood_.getDayOfYear() - 8) + " ORDER BY dayOfYear  ";
 
         Cursor cursor = getReadableDatabase().rawQuery(selectMood, null);
         cursor.moveToFirst();
