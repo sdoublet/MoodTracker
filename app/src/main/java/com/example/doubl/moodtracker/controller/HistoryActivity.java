@@ -1,4 +1,4 @@
-package com.example.doubl.moodtracker.view;
+package com.example.doubl.moodtracker.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,11 +7,12 @@ import android.widget.ListView;
 import com.example.doubl.moodtracker.R;
 import com.example.doubl.moodtracker.controller.DataBaseManager;
 import com.example.doubl.moodtracker.model.Mood;
+import com.example.doubl.moodtracker.view.HistoryListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class History extends AppCompatActivity {
+public class HistoryActivity extends AppCompatActivity {
 
     private ListView listView;
     private ArrayList<Mood> moodArrayList = new ArrayList<>();

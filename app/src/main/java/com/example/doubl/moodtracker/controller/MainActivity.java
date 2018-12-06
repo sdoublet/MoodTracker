@@ -16,11 +16,14 @@ import android.view.View;
 import com.example.doubl.moodtracker.R;
 import com.example.doubl.moodtracker.model.MoodEnum;
 import com.example.doubl.moodtracker.view.DialogFragmentSms;
-import com.example.doubl.moodtracker.view.History;
+import com.example.doubl.moodtracker.view.DialogueFragment;
 import com.example.doubl.moodtracker.view.RecyclerviewAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 public class MainActivity extends AppCompatActivity implements RecyclerviewAdapter.OnMoodClickedCallBack {
 
@@ -62,10 +65,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 Log.d("rv", "onScrollStateChanged() called with: , newState = [" + newState + "]");
-                if (newState==1){
+                if (newState==SCROLL_STATE_DRAGGING){
                     Log.e("state", "you have started scrolling now");
-                }else if (newState == 0){
+                }else if (newState == SCROLL_STATE_IDLE){
                     Log.e("state", "you have stopped scrolling");
+
                 }
             }
 
@@ -82,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
                 currentpage = offset/recyclerView.getHeight();
 
                 // To know position
-                MoodEnum.currentPageMood(currentpage);
+               // MoodEnum.currentPageMood(currentpage);
 
                 dataBaseManager.insertNewMood();
                 dataBaseManager.insertMood("", MoodEnum.values()[currentpage]);
@@ -105,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerviewAdapt
     }
 
     public void history(View view) {
-        Intent intent = new Intent(this, History.class);
+        Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
         DataBaseManager dataBaseManager= new DataBaseManager(this);
         dataBaseManager.deleteOldMood();

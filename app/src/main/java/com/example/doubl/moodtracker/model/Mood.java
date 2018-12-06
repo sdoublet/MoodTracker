@@ -8,12 +8,12 @@ import org.joda.time.DateTime;
 public class Mood {
 
     private String comment;
-    private String mood_;
+    private MoodEnum moodEnum;
     private int date;
 
-    public Mood(String comment, String mood_, int date) {
+    public Mood(String comment, MoodEnum moodEnum, int date) {
         this.comment = comment;
-        this.mood_ = mood_;
+        this.moodEnum = moodEnum;
         this.date = date;
     }
 
@@ -25,11 +25,12 @@ public class Mood {
     }
 
 
-    public String getMood_() {
-        return mood_;
+
+
+
+    public MoodEnum getMoodEnum() {
+        return moodEnum;
     }
-
-
 
     public int getDate() {
         return date;

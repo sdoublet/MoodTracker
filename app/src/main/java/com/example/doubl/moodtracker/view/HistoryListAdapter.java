@@ -11,23 +11,23 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.doubl.moodtracker.R;
 import com.example.doubl.moodtracker.model.Mood;
-
-
 import java.util.ArrayList;
 
 
 public class HistoryListAdapter extends ArrayAdapter<Mood> {
+
     private ArrayList<Mood> moodsList;
+
     private Context context;
 
 
-    HistoryListAdapter(Context context, int layoutResourceId, ArrayList<Mood> historyMoodArrayList) {
+    public HistoryListAdapter(Context context, int layoutResourceId, ArrayList<Mood> historyMoodArrayList) {
         super(context, layoutResourceId, historyMoodArrayList);
         this.moodsList = historyMoodArrayList;
         this.context = context;
+
 
     }
 
@@ -75,27 +75,22 @@ public class HistoryListAdapter extends ArrayAdapter<Mood> {
         textViewDay.setText(mood.textviewSetText());
         setBackgroundColor(convertView, width, mood);
 
+
         return convertView;
     }
 
     private void setBackgroundColor(View convertView, int width, Mood mood) {
 
-        if (mood.getMood_().contains("SUPPER_HAPPY")) {
-            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.banana_yellow));
-        } else if (mood.getMood_().contains("HAPPY")) {
-            convertView.getLayoutParams().width = width * 4;
-            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.light_sage));
-        } else if (mood.getMood_().contains("NORMAL")) {
-            convertView.getLayoutParams().width = width * 3;
-            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.cornflower_blue_65));
-        } else if (mood.getMood_().contains("DISAPPOINTED")) {
-            convertView.getLayoutParams().width = width * 2;
-            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.warm_grey));
-        } else if (mood.getMood_().contains("SAD")) {
-            convertView.getLayoutParams().width = width;
-            convertView.setBackgroundColor(convertView.getResources().getColor(R.color.faded_red));
+        convertView.setBackgroundColor(convertView.getContext().getResources().getColor(mood.getMoodEnum().getColorBakground()));
+        convertView.getLayoutParams().width = width* mood.getMoodEnum().getWidth();
 
-        }
     }
+
+
+
 }
+
+
+
+
 

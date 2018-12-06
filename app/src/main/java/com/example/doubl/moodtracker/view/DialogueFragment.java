@@ -1,4 +1,4 @@
-package com.example.doubl.moodtracker.controller;
+package com.example.doubl.moodtracker.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 
 import com.example.doubl.moodtracker.R;
+import com.example.doubl.moodtracker.controller.DataBaseManager;
 
 public class DialogueFragment extends DialogFragment {
 

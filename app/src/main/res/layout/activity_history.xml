@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#CCC"
-    tools:context=".view.History">
+    tools:context=".controller.HistoryActivity">
 
     <ListView
         android:id="@+id/list_item"

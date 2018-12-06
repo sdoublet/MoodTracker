@@ -54,7 +54,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
     }
 
     // update the table with the comment DialogFragment
-    void updateComment(String comment_) {
+    public void updateComment(String comment_) {
         Mood mood = new Mood();
         ContentValues values = new ContentValues();
         values.put("comment", comment_);
@@ -95,13 +95,26 @@ public class DataBaseManager extends SQLiteOpenHelper {
         Cursor cursor = getReadableDatabase().rawQuery(selectMood, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Mood mood = new Mood(cursor.getString(cursor.getColumnIndex("comment")), cursor.getString(cursor.getColumnIndex("mood")),
+            MoodEnum moodEnum = MoodEnum.valueOf(cursor.getString(cursor.getColumnIndex("mood")));
+            Mood mood = new Mood(cursor.getString(cursor.getColumnIndex("comment")), moodEnum,
                     cursor.getInt(cursor.getColumnIndex("dayOfYear")));
             moods.add(mood);
             cursor.moveToNext();
         }
         cursor.close();
         return moods;
+    }
+
+    public Mood getLastMood(){
+        Mood mood = new Mood();
+        Cursor cursor = getReadableDatabase().query(DATA_TABLE,null, "dayOfYear = "+ mood.getDayOfYear() , null, null,null,null );
+        if (cursor.moveToFirst()){
+            MoodEnum moodEnum = MoodEnum.valueOf(cursor.getString(cursor.getColumnIndex("mood")));
+            mood = new Mood(cursor.getString(cursor.getColumnIndex("comment")), moodEnum,
+                    cursor.getInt(cursor.getColumnIndex("dayOfYear")));
+        }
+        cursor.close();
+        return mood;
     }
 
 }
