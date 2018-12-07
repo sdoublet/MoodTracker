@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 import android.util.Log;
 import android.view.View;
+
 import com.example.doubl.moodtracker.R;
 import com.example.doubl.moodtracker.model.MoodEnum;
 import com.example.doubl.moodtracker.view.DialogFragmentSms;
@@ -28,7 +29,6 @@ import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.OnMoodClickedCallBack {
 
     private MediaPlayer mediaPlayer1;
-
 
 
     @SuppressLint("WrongViewCast")
@@ -65,9 +65,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 Log.d("rv", "onScrollStateChanged() called with: , newState = [" + newState + "]");
-                if (newState==SCROLL_STATE_DRAGGING){
+                if (newState == SCROLL_STATE_DRAGGING) {
                     Log.e("state", "you have started scrolling now");
-                }else if (newState == SCROLL_STATE_IDLE){
+                } else if (newState == SCROLL_STATE_IDLE) {
                     Log.e("state", "you have stopped scrolling");
 
                 }
@@ -79,26 +79,25 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
                 Log.d("onScrolled", "onScrolled() called with: , dx = [" + dx + "], dy = [" + dy + "]");
 
                 DataBaseManager dataBaseManager = new DataBaseManager(recyclerView.getContext());
-                int offset =recyclerView.computeVerticalScrollOffset();
+                int offset = recyclerView.computeVerticalScrollOffset();
                 int currentPage;
 
                 //To have the height of RecyclerView only if items are equals
-                currentPage = offset/recyclerView.getHeight();
+                currentPage = offset / recyclerView.getHeight();
 
-                // To know position
-               // MoodEnum.currentPageMood(currentPage);
+                //dataBaseManager.insertNewMood();
 
-                dataBaseManager.insertNewMood();
                 dataBaseManager.insertMood("", MoodEnum.values()[currentPage]);
+                dataBaseManager.updateNewMood("", MoodEnum.values()[currentPage]);
 
 
-
-                String str = Integer.toString( currentPage);
-                Log.i("moodEnum",str ); }
+                String str = Integer.toString(currentPage);
+                Log.i("moodEnum", str);
+            }
         });
     }
 
-    public void sms(View view){
+    public void sms(View view) {
         DialogFragmentSms dialogFragment = new DialogFragmentSms();
         dialogFragment.show(getSupportFragmentManager(), "sms");
     }
@@ -111,26 +110,32 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
     public void history(View view) {
         Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
-        DataBaseManager dataBaseManager= new DataBaseManager(this);
-        dataBaseManager.deleteOldMood();
+
     }
+
     @Override
     protected void onStart() {
-        super.onStart(); }
+        super.onStart();
+    }
 
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        mediaPlayer1.start(); }
+        mediaPlayer1.start();
+    }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mediaPlayer1.pause(); }
+        mediaPlayer1.pause();
+    }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy(); }
+        super.onDestroy();
+        DataBaseManager dataBaseManager = new DataBaseManager(this);
+        dataBaseManager.deleteOldMood();
+    }
 
     @Override
     public void onMoodClicked(MoodEnum position) {
