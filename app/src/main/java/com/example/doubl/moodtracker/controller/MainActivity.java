@@ -26,7 +26,7 @@ import java.util.List;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 
-public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.OnMoodClickedCallBack {
+public class MainActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer1;
 
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         happyList.add(MoodEnum.DISAPPOINTED);
         happyList.add(MoodEnum.SAD);
 
-        final RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(happyList, this);
+        final RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(happyList);
         recyclerView.setAdapter(recyclerViewAdapter);
 
         // to scroll to happy mood position
@@ -137,7 +137,4 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewAdapt
         dataBaseManager.deleteOldMood();
     }
 
-    @Override
-    public void onMoodClicked(MoodEnum position) {
-    }
 }

@@ -18,51 +18,38 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.HappyViewHolder> {
 
     private List<MoodEnum> happyList;
-    private OnMoodClickedCallBack callBack;
 
 
-    public interface OnMoodClickedCallBack {
-        void onMoodClicked(MoodEnum position);
+    public class HappyViewHolder extends RecyclerView.ViewHolder {
+
+        private ImageView ivSmiley;
+        public View background;
+
+
+        private HappyViewHolder(final View itemView) {
+            super(itemView);
+
+            ivSmiley = itemView.findViewById(R.id.smiley);
+            background = itemView.findViewById(R.id.background);
+            ivSmiley.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MediaPlayer mediaPlayer = MediaPlayer.create(v.getContext(), R.raw.sound3);
+                    mediaPlayer.start();
+                    RotateAnimation rotateAnimation = new RotateAnimation(0, 3600, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+                    rotateAnimation.setDuration(3700);
+                    v.startAnimation(rotateAnimation);
+
+                }
+            });
+        }
+
+
     }
 
-    public  class HappyViewHolder extends RecyclerView.ViewHolder {
-
-    private ImageView ivSmiley;
-    public View background;
-
-
-    private HappyViewHolder(final View itemView) {
-        super(itemView);
-
-        ivSmiley = itemView.findViewById(R.id.smiley);
-        background = itemView.findViewById(R.id.background);
-        ivSmiley.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MediaPlayer mediaPlayer = MediaPlayer.create(v.getContext(), R.raw.sound3);
-                mediaPlayer.start();
-                RotateAnimation rotateAnimation = new RotateAnimation(0, 3600, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-                rotateAnimation.setDuration(3700);
-                v.startAnimation(rotateAnimation);
-
-                onMoodSmileyClicked(getAdapterPosition());
-            }
-        });
+    public RecyclerViewAdapter(List<MoodEnum> happyList) {
+        this.happyList = happyList;
     }
-
-
-}public RecyclerViewAdapter(List<MoodEnum> happyList, OnMoodClickedCallBack callBack) {
-    this.happyList = happyList;
-    this.callBack = callBack;
-
-}
-
-
-
-    private void onMoodSmileyClicked(int adapterPosition) {
-        callBack.onMoodClicked(happyList.get(adapterPosition));
-    }
-
 
     @NonNull
     @Override

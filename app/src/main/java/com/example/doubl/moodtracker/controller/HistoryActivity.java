@@ -38,12 +38,7 @@ public class HistoryActivity extends AppCompatActivity {
         super.onPostResume();
         dataManager = new DataBaseManager(this);
         history();
-        //  if (dataManager.isHistory()!=0){
-        //      history();
-        //  }else {
-        //      emptyDatabase();
-        //      Toast.makeText(this, "no history yet", Toast.LENGTH_LONG).show();
-        //  }
+
         listView.setAdapter(new HistoryListAdapter(this, R.layout.row_history_listview, moodArrayList));
         dataManager.close();
     }
