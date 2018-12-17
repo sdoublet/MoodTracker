@@ -13,7 +13,7 @@ import android.widget.EditText;
 import com.example.doubl.moodtracker.R;
 import com.example.doubl.moodtracker.controller.DataBaseManager;
 
-public class DialogueFragment extends DialogFragment {
+public class DialogFragmentComments extends DialogFragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

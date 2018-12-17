@@ -47,7 +47,7 @@ public class Mood {
        int days = dateTime1.getDayOfYear();
        int year = dateTime1.getYear() *1000;
        int date = days + year;
-       String str = Integer.toString(days);
+       String str = Integer.toString(date);
        Log.i("date", str);
 
         return date;

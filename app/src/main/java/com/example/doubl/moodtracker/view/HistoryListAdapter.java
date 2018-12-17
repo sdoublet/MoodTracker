@@ -16,11 +16,13 @@ import com.example.doubl.moodtracker.model.Mood;
 import java.util.ArrayList;
 
 
+
 public class HistoryListAdapter extends ArrayAdapter<Mood> {
 
     private ArrayList<Mood> moodsList;
 
     private Context context;
+
 
 
     public HistoryListAdapter(Context context, int layoutResourceId, ArrayList<Mood> historyMoodArrayList) {
@@ -68,7 +70,7 @@ public class HistoryListAdapter extends ArrayAdapter<Mood> {
         imageButtonComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, mood.getComment(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, mood.getComment(), Toast.LENGTH_LONG).show();
             }
         });
 

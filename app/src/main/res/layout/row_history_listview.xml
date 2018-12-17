@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/row_history_layout"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
+    android:layout_height="93dp"
     android:background="@color/faded_red"
     android:orientation="vertical">
 

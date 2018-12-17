@@ -15,7 +15,7 @@ import com.example.doubl.moodtracker.model.MoodEnum;
 import java.util.List;
 
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.HappyViewHolder> {
+public class SmileyAdapter extends RecyclerView.Adapter<SmileyAdapter.HappyViewHolder> {
 
     private List<MoodEnum> happyList;
 
@@ -47,7 +47,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     }
 
-    public RecyclerViewAdapter(List<MoodEnum> happyList) {
+    public SmileyAdapter(List<MoodEnum> happyList) {
         this.happyList = happyList;
     }
 

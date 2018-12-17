@@ -38,27 +38,31 @@ public class DataBaseManager extends SQLiteOpenHelper {
     }
 
     // insert mood in table
-    @SuppressWarnings("SameParameterValue")
-    void insertMood(String comment, MoodEnum moodEnum) {
+
+    void insertMood( MoodEnum moodEnum) {
         Mood mood = new Mood();
         int date = mood.getDayOfYear();
 
         ContentValues values = new ContentValues();
-        values.put("comment", comment);
         values.put("mood", moodEnum.name());
         values.put("dayOfYear", date);
 
-
+        this.getWritableDatabase().insert(DATA_TABLE, null, values);
+    }
+    void insertNow (){
+        ContentValues values = new ContentValues();
+        values.put("mood", MoodEnum.SAD.name());
+        values.put("dayOfYear", "2018342");
+        values.put("comment", "");
         this.getWritableDatabase().insert(DATA_TABLE, null, values);
     }
 
     // update new mood for the same date
-    @SuppressWarnings("SameParameterValue")
-    void updateNewMood(String comment, MoodEnum moodEnum) {
+
+    void updateNewMood( MoodEnum moodEnum) {
         Mood mood = new Mood();
         int date = mood.getDayOfYear();
         ContentValues values = new ContentValues();
-        values.put("comment", comment);
         values.put("mood", moodEnum.name());
         values.put("dayOfYear", date);
 
@@ -68,10 +72,10 @@ public class DataBaseManager extends SQLiteOpenHelper {
     }
 
     // update the table with the comment DialogFragment
-    public void updateComment(String comment_) {
+    public void updateComment(String comment) {
         Mood mood = new Mood();
         ContentValues values = new ContentValues();
-        values.put("comment", comment_);
+        values.put("comment", comment);
         this.getWritableDatabase().update(DATA_TABLE, values, "dayOfYear=" + mood.getDayOfYear(), null);
 
 
@@ -80,8 +84,8 @@ public class DataBaseManager extends SQLiteOpenHelper {
 
     // delete on the table if date equal 0 to have only one value per date
     void deleteOldMood() {
-        Mood mood = new Mood();
-        String sql = " DELETE FROM " + DATA_TABLE + " WHERE dayOfYear>" + (mood.getDayOfYear() + 30);
+
+        String sql = " DELETE FROM " + DATA_TABLE + " WHERE dayOfYear NOT IN ( SELECT dayOfYear FROM MOOD ORDER BY dayOfYear DESC LIMIT 8)";
         this.getWritableDatabase().execSQL(sql);
     }
 
@@ -90,7 +94,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
     List<Mood> readForWeek() {
         List<Mood> moods = new ArrayList<>();
 
-        String selectMood = " SELECT * FROM " + DATA_TABLE + " ORDER BY dayOfYear LIMIT 7  ";
+        String selectMood = " SELECT * FROM " + DATA_TABLE + " ORDER BY dayOfYear  LIMIT 8";
 
         Cursor cursor = getReadableDatabase().rawQuery(selectMood, null);
         cursor.moveToFirst();

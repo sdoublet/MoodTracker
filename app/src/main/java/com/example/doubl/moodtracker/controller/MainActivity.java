@@ -17,8 +17,8 @@ import android.view.View;
 import com.example.doubl.moodtracker.R;
 import com.example.doubl.moodtracker.model.MoodEnum;
 import com.example.doubl.moodtracker.view.DialogFragmentSms;
-import com.example.doubl.moodtracker.view.DialogueFragment;
-import com.example.doubl.moodtracker.view.RecyclerViewAdapter;
+import com.example.doubl.moodtracker.view.DialogFragmentComments;
+import com.example.doubl.moodtracker.view.SmileyAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         happyList.add(MoodEnum.DISAPPOINTED);
         happyList.add(MoodEnum.SAD);
 
-        final RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(happyList);
-        recyclerView.setAdapter(recyclerViewAdapter);
+        final SmileyAdapter smileyAdapter = new SmileyAdapter(happyList);
+        recyclerView.setAdapter(smileyAdapter);
 
         // to scroll to happy mood position
         recyclerView.scrollToPosition(1);
@@ -85,10 +85,9 @@ public class MainActivity extends AppCompatActivity {
                 //To have the height of RecyclerView only if items are equals
                 currentPage = offset / recyclerView.getHeight();
 
-                //dataBaseManager.insertNewMood();
 
-                dataBaseManager.insertMood("", MoodEnum.values()[currentPage]);
-                dataBaseManager.updateNewMood("", MoodEnum.values()[currentPage]);
+                dataBaseManager.insertMood( MoodEnum.values()[currentPage]);
+                dataBaseManager.updateNewMood( MoodEnum.values()[currentPage]);
 
 
                 String str = Integer.toString(currentPage);
@@ -103,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void comment(View view) {
-        DialogueFragment dialogFragment = new DialogueFragment();
+        DialogFragmentComments dialogFragment = new DialogFragmentComments();
         dialogFragment.show(getSupportFragmentManager(), "dialog");
     }
 
@@ -122,6 +121,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onPostResume() {
         super.onPostResume();
         mediaPlayer1.start();
+        DataBaseManager dataBaseManager = new DataBaseManager(this);
+        dataBaseManager.deleteOldMood();
+       // dataBaseManager.insertNow();
+
     }
 
     @Override
@@ -133,8 +136,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        DataBaseManager dataBaseManager = new DataBaseManager(this);
-        dataBaseManager.deleteOldMood();
+
     }
 
 }
