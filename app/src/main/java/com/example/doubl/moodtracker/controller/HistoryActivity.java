@@ -37,13 +37,13 @@ public class HistoryActivity extends AppCompatActivity {
     protected void onPostResume() {
         super.onPostResume();
         dataManager = new DataBaseManager(this);
-        history();
+        readHistory();
 
         listView.setAdapter(new HistoryListAdapter(this, R.layout.row_history_listview, moodArrayList));
         dataManager.close();
     }
 
-    public void history(){
+    public void readHistory(){
         List<Mood> moodList = dataManager.readForWeek();
         moodArrayList.addAll(moodList);
 

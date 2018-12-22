@@ -81,14 +81,16 @@ public class MainActivity extends AppCompatActivity {
                 DataBaseManager dataBaseManager = new DataBaseManager(recyclerView.getContext());
                 int offset = recyclerView.computeVerticalScrollOffset();
                 int currentPage;
-
+                int modulo=  offset%recyclerView.getHeight();
                 //To have the height of RecyclerView only if items are equals
                 currentPage = offset / recyclerView.getHeight();
 
+                if (modulo == 0) {
+                    dataBaseManager.insertMood(MoodEnum.values()[currentPage]);
+                    dataBaseManager.updateNewMood(MoodEnum.values()[currentPage]);
+                }
 
-                dataBaseManager.insertMood( MoodEnum.values()[currentPage]);
-                dataBaseManager.updateNewMood( MoodEnum.values()[currentPage]);
-
+                Log.i("modulo", Integer.toString(modulo));
 
                 String str = Integer.toString(currentPage);
                 Log.i("moodEnum", str);
@@ -96,17 +98,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void sms(View view) {
+    public void onClickSmsButton(View view) {
         DialogFragmentSms dialogFragment = new DialogFragmentSms();
-        dialogFragment.show(getSupportFragmentManager(), "sms");
+        dialogFragment.show(getSupportFragmentManager(), "onClickSmsButton");
     }
 
-    public void comment(View view) {
+    public void onClickCommentButton(View view) {
         DialogFragmentComments dialogFragment = new DialogFragmentComments();
         dialogFragment.show(getSupportFragmentManager(), "dialog");
     }
 
-    public void history(View view) {
+    public void onClickHistoryButton(View view) {
         Intent intent = new Intent(this, HistoryActivity.class);
         startActivity(intent);
 
@@ -123,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
         mediaPlayer1.start();
         DataBaseManager dataBaseManager = new DataBaseManager(this);
         dataBaseManager.deleteOldMood();
-       // dataBaseManager.insertNow();
 
     }
 
@@ -136,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
 
     }
 

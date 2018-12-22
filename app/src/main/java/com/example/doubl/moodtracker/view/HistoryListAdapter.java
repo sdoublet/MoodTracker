@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,8 +72,10 @@ public class HistoryListAdapter extends ArrayAdapter<Mood> {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, mood.getComment(), Toast.LENGTH_LONG).show();
+                Log.e("comment", mood.getComment());
             }
         });
+
 
         textViewDay.setText(mood.textViewSetText());
         setBackgroundColor(convertView, width, mood);

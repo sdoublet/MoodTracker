@@ -49,13 +49,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
 
         this.getWritableDatabase().insert(DATA_TABLE, null, values);
     }
-    void insertNow (){
-        ContentValues values = new ContentValues();
-        values.put("mood", MoodEnum.SAD.name());
-        values.put("dayOfYear", "2018342");
-        values.put("comment", "");
-        this.getWritableDatabase().insert(DATA_TABLE, null, values);
-    }
+
 
     // update new mood for the same date
 
@@ -71,7 +65,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
 
     }
 
-    // update the table with the comment DialogFragment
+    // update the table with the onClickCommentButton DialogFragment
     public void updateComment(String comment) {
         Mood mood = new Mood();
         ContentValues values = new ContentValues();
@@ -90,7 +84,7 @@ public class DataBaseManager extends SQLiteOpenHelper {
     }
 
 
-    // read the table in history
+    // read the table in readHistory
     List<Mood> readForWeek() {
         List<Mood> moods = new ArrayList<>();
 
